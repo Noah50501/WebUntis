@@ -81,7 +81,7 @@ test('should method logout return true', async () => {
 
 cases(
     'should getLatestSchoolyear return object',
-    async ({ validate }) => {
+    async ({ validate, dateFormat }) => {
         const name = 'testName';
         const id = 'testId';
         const untis = createInstance();
@@ -91,14 +91,14 @@ cases(
                 {
                     id,
                     name,
-                    startDate: '20191111',
-                    endDate: '20191211',
+                    startDate: dateFormat === 'string' ? '20191111' : 20191111,
+                    endDate: dateFormat === 'string' ? '20191211' : 20191211,
                 },
                 {
                     id,
                     name,
-                    startDate: '20191113',
-                    endDate: '20191115',
+                    startDate: dateFormat === 'string' ? '20191113' : 20191113,
+                    endDate: dateFormat === 'string' ? '20191115' : 20191115,
                 },
             ],
         });
@@ -111,8 +111,9 @@ cases(
         });
     },
     [
-        { name: 'with validate', validate: true },
-        { name: 'without validate', validate: false },
+        { name: 'with validate, string date', validate: true, dateFormat: 'string' },
+        { name: 'with validate, numeric date', validate: true, dateFormat: 'number' },
+        { name: 'without validate, string date', validate: false, dateFormat: 'string' },
     ]
 );
 
