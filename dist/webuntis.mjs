@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { parse, startOfDay, format } from 'date-fns';
+import { startOfDay, format, parse as parse$1 } from 'date-fns';
 
 const fieldContentRegExp = /^[\u0009\u0020-\u007e\u0080-\u00ff]+$/;
 function serialize(name, val, opt = {}) {
@@ -91,6 +91,9 @@ var __defNormalProp$1 = (obj, key, value) => key in obj ? __defProp$1(obj, key, 
 var __publicField$1 = (obj, key, value) => {
   __defNormalProp$1(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
+};
+const parse = (dateStr, formatStr, referenceDate, options) => {
+  return parse$1(`${dateStr}`, formatStr, referenceDate, options);
 };
 const _Base = class _Base {
   /**

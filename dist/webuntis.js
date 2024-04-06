@@ -94,6 +94,9 @@ var __publicField$1 = (obj, key, value) => {
   __defNormalProp$1(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
+const parse = (dateStr, formatStr, referenceDate, options) => {
+  return dateFns.parse(`${dateStr}`, formatStr, referenceDate, options);
+};
 const _Base = class _Base {
   /**
    *
@@ -207,8 +210,8 @@ const _Base = class _Base {
   async getLatestSchoolyear(validateSession = true) {
     const data = await this._request("getSchoolyears", {}, validateSession);
     data.sort((a, b) => {
-      const na = dateFns.parse(a.startDate, "yyyyMMdd", /* @__PURE__ */ new Date());
-      const nb = dateFns.parse(b.startDate, "yyyyMMdd", /* @__PURE__ */ new Date());
+      const na = parse(a.startDate, "yyyyMMdd", /* @__PURE__ */ new Date());
+      const nb = parse(b.startDate, "yyyyMMdd", /* @__PURE__ */ new Date());
       return nb.getTime() - na.getTime();
     });
     if (!data[0])
@@ -216,8 +219,8 @@ const _Base = class _Base {
     return {
       name: data[0].name,
       id: data[0].id,
-      startDate: dateFns.parse(data[0].startDate, "yyyyMMdd", /* @__PURE__ */ new Date()),
-      endDate: dateFns.parse(data[0].endDate, "yyyyMMdd", /* @__PURE__ */ new Date())
+      startDate: parse(data[0].startDate, "yyyyMMdd", /* @__PURE__ */ new Date()),
+      endDate: parse(data[0].endDate, "yyyyMMdd", /* @__PURE__ */ new Date())
     };
   }
   /**
@@ -227,8 +230,8 @@ const _Base = class _Base {
   async getSchoolyears(validateSession = true) {
     const data = await this._request("getSchoolyears", {}, validateSession);
     data.sort((a, b) => {
-      const na = dateFns.parse(a.startDate, "yyyyMMdd", /* @__PURE__ */ new Date());
-      const nb = dateFns.parse(b.startDate, "yyyyMMdd", /* @__PURE__ */ new Date());
+      const na = parse(a.startDate, "yyyyMMdd", /* @__PURE__ */ new Date());
+      const nb = parse(b.startDate, "yyyyMMdd", /* @__PURE__ */ new Date());
       return nb.getTime() - na.getTime();
     });
     if (!data[0])
@@ -237,8 +240,8 @@ const _Base = class _Base {
       return {
         name: year.name,
         id: year.id,
-        startDate: dateFns.parse(year.startDate, "yyyyMMdd", /* @__PURE__ */ new Date()),
-        endDate: dateFns.parse(year.endDate, "yyyyMMdd", /* @__PURE__ */ new Date())
+        startDate: parse(year.startDate, "yyyyMMdd", /* @__PURE__ */ new Date()),
+        endDate: parse(year.endDate, "yyyyMMdd", /* @__PURE__ */ new Date())
       };
     });
   }
@@ -550,7 +553,7 @@ const _Base = class _Base {
   static convertUntisDate(date, baseDate = dateFns.startOfDay(/* @__PURE__ */ new Date())) {
     if (typeof date !== "string")
       date = `${date}`;
-    return dateFns.parse(date, "yyyyMMdd", baseDate);
+    return parse(date, "yyyyMMdd", baseDate);
   }
   /**
    * Convert a untis time string to a JS Date object
@@ -561,7 +564,7 @@ const _Base = class _Base {
   static convertUntisTime(time, baseDate = /* @__PURE__ */ new Date()) {
     if (typeof time !== "string")
       time = `${time}`;
-    return dateFns.parse(time.padStart(4, "0"), "Hmm", baseDate);
+    return parse(time.padStart(4, "0"), "Hmm", baseDate);
   }
   /**
    * Get all known Subjects for the current logged-in user
