@@ -32,7 +32,7 @@ import { WebUntisElementType } from './types';
  * @param formatStr {string}
  * @param referenceDate {DateType | number | string}
  * @param options {ParseOptions | undefined}
- * @returns 
+ * @returns
  */
 const parse = <DateType extends Date>(
     dateStr: string | number,
