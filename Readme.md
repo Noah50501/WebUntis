@@ -17,7 +17,7 @@ As I have not been a student for a long time, I currently have no access to any 
 ```javascript
 import { WebUntis } from 'webuntis';
 
-const untis = new WebUntis('school', 'username', 'password', 'xyz.webuntis.com');
+const untis = new WebUntis('Galileo-Schule Bexbach', 'SchäfeNoa', 'Handball123!', 'xyz.webuntis.com');
 
 await untis.login();
 const timetable = await untis.getOwnTimetableForToday();
@@ -80,7 +80,7 @@ const timetable = await untis.getTimetableForToday(classes[0].id, WebUntisElemen
 This package is compatible with CJS and ESM. *Note:* This package primary target is nodejs. It may also work with runtimes like react-native, but it will probably not work in the browser.
 
 ```bash
-yarn add webuntis
+ add webuntis
 # Or
 npm i webuntis --save
 # Or
